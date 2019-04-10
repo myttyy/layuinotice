@@ -26,6 +26,7 @@
                 <hr class="layui-bg-blue">
                 <blockquote class="layui-elem-quote layui-quote-nm">API</blockquote>
                 <button class="layui-btn" id="create1">生成notice</button>
+                <button class="layui-btn" id="clear1">移除notice</button>
                 <pre class="layui-code">
                 //使用说明
                 layui.use(['notice'], function () {
@@ -55,12 +56,8 @@
                 </pre>
                 <br>
                 <hr class="layui-bg-blue">
-
-                <button class="layui-btn" id="closeAll">移除全部</button>
-<pre class="layui-code">
-// 关闭全部
-notice.closeAll();
-</pre>
+                <button class="layui-btn" id="desktopInfo">桌面提示</button>
+                
             </div>
         </div>
         <br>
@@ -105,7 +102,7 @@ notice.closeAll();
         let notice01;
         $("#create1").click(function () {
             let options = {
-                closeButton:true,//显示关闭按钮
+                closeButton:false,//显示关闭按钮
                 debug:false,//启用debug
                 positionClass:"toast-top-center",//弹出的位置,
                 showDuration:"300",//显示的时间
@@ -121,11 +118,15 @@ notice.closeAll();
         });
 
 
-        $("#closeAll").click(function () {
+        $("#clear1").click(function () {
             layer.msg('移除生成的notice通知');
             notice.clear(notice01);
         });
 
+        $("#desktopInfo").click(function () {
+            layer.msg('生成桌面通知');
+            notice.desktopInfo("无线长，2333，66666，给你一百分不怕你骄傲的！","layuinotice");
+        });
 
         window.setTimeout(function () {
        

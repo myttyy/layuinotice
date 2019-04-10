@@ -3,6 +3,9 @@
 #### 项目介绍
 
 ##### 更新日志
+- 2019-04-10
+ - V2增加桌面通知方法
+
 -  2019-03-26 
  - 重构V2版本，如需使用V1版请查看v1分支
  - 新增多种位置选择
@@ -38,30 +41,33 @@
 layui.use(['notice'], function () {
     var notice = layui.notice; // 允许别名 toastr
         
-        // 初始化配置，同一样式只需要配置一次，非必须初始化，有默认配置
-        notice.options = {
-            closeButton:true,//显示关闭按钮
-            debug:false,//启用debug
-            positionClass:"toast-top-right",//弹出的位置,
-            showDuration:"300",//显示的时间
-            hideDuration:"1000",//消失的时间
-            timeOut:"2000",//停留的时间
-            extendedTimeOut:"1000",//控制时间
-            showEasing:"swing",//显示时的动画缓冲方式
-            hideEasing:"linear",//消失时的动画缓冲方式
-            iconClass: 'toast-info', // 自定义图标，有内置，如不需要则传空 支持layui内置图标/自定义iconfont类名
-            onclick: null, // 点击关闭回调
-        };
+    // 初始化配置，同一样式只需要配置一次，非必须初始化，有默认配置
+    notice.options = {
+        closeButton:true,//显示关闭按钮
+        debug:false,//启用debug
+        positionClass:"toast-top-right",//弹出的位置,
+        showDuration:"300",//显示的时间
+        hideDuration:"1000",//消失的时间
+        timeOut:"2000",//停留的时间
+        extendedTimeOut:"1000",//控制时间
+        showEasing:"swing",//显示时的动画缓冲方式
+        hideEasing:"linear",//消失时的动画缓冲方式
+        iconClass: 'toast-info', // 自定义图标，有内置，如不需要则传空 支持layui内置图标/自定义iconfont类名
+        onclick: null, // 点击关闭回调
+    };
 
 
-        notice.warning("成功");
-        notice.info("提示信息：毛都没有...");
-        notice.error("大佬，我咋知道怎么肥四！");
-        notice.success("大佬，我咋知道怎么肥四！");
-       
-        // 手动移除notice 或者使用 removeToast
-        notice.hideToast()
+    notice.warning("成功");
+    notice.info("提示信息：毛都没有...");
+    notice.error("大佬，我咋知道怎么肥四！");
+    let notice01 = notice.success("大佬，我咋知道怎么肥四！");
+    /// 增加桌面提示
+    notice.desktopInfo("大佬，我咋知道怎么肥四！");
+
+    // 手动移除notice 或者使用 remove
+    notice01.clear(notice01);
         
+    
 });
 ```
 4. positionClass属性可选值：
@@ -74,7 +80,52 @@ layui.use(['notice'], function () {
 - toast-bottom-right 
 - toast-bottom-left
 
-5. 其他配置项看源码吧，不是很难理解的
+5. 其他配置项
+
+```javascript
+   // 默认配置
+   {
+        tapToDismiss: true,
+        toastClass: 'toast',
+        containerId: 'toast-container',
+        debug: false,
+
+        showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
+        showDuration: 300,
+        showEasing: 'swing', //swing and linear are built into jQuery
+        onShown: undefined,
+        hideMethod: 'fadeOut',
+        hideDuration: 1000,
+        hideEasing: 'swing',
+        onHidden: undefined,
+        closeMethod: false,
+        closeDuration: false,
+        closeEasing: false,
+        closeOnHover: true,
+
+        extendedTimeOut: 1000,
+        iconClasses: {
+            error: 'toast-error',
+            info: 'toast-info',
+            success: 'toast-success',
+            warning: 'toast-warning'
+        },
+        iconClass: 'toast-info',
+        positionClass: 'toast-top-right',
+        timeOut: 5000, // Set timeOut and extendedTimeOut to 0 to make it sticky
+        titleClass: 'toast-title',
+        messageClass: 'toast-message',
+        escapeHtml: false,
+        target: 'body',
+        closeHtml: '<button type="button">&times;</button>',
+        closeClass: 'toast-close-button',
+        newestOnTop: true,
+        preventDuplicates: false,
+        progressBar: false,
+        progressClass: 'toast-progress',
+        rtl: false
+    };
+```
 
 5. 支持方法
 
@@ -87,7 +138,7 @@ layui.use(['notice'], function () {
     // 异常提示
     notice.error("提示内容");
     // 
-     notice.success("提示内容");
+    notice.success("提示内容");
 });
 ```
 
